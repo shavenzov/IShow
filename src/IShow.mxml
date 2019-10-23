@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:local="*"
+    xmlns:ravis="org.un.cava.birdeye.ravis.graphLayout.visual.*"
+	xmlns:navigator="org.un.cava.birdeye.ravis.components.navigator.*"
+	xmlns:search="ui.search.*"
+	xmlns:settings="ui.settings.*"
+	xmlns:ui="ui.controls.*"
+	xmlns:controls="com.controls.*"
+	preloader="MainPreloader"
+	width="100%" height="100%" minWidth="850" backgroundColor="#f5f5f5" creationComplete="onCreationComplete()" initialize="onInit()" addedToStage="onAddedToStage()">
+	<fx:Style source="styles/main.css"/>
+	<fx:Script source="ishow.as" />
+	
+	<s:layout>
+		<s:VerticalLayout gap="0"/>
+	</s:layout>
+	
+	<local:ControlPanel id="controlPanel" vg="{vg}" width="100%" openNavigator="openNavigator()" closeNavigator="closeNavigator()" closeSearchDialog="closeSearchDialog()" openSearchDialog="openSearchDialog()" openSettingsDialog="openSettingsDialog()" closeSettingsDialog="closeSettingsDialog()" openHelp="showApplicationInfo()"/>
+	
+	<s:Group width="100%" height="100%">
+		<s:Scroller id="scroller" left="0" right="0" top="0" bottom="0">
+			<ravis:VisualGraph id="vg" width="100%" height="100%" showGrid="true" itemClick="onItemClick( event )" nodeDoubleClick="onNodeDoubleClick( event )" edgeDoubleClick="onEdgeDoubleClick( event )" createEdge="showAddRelationDialog( event )" removeObject="showRemoveRelationDialog( event )" openCardClick="showInfo( event.node )"/>
+		</s:Scroller>
+		<ui:LayoutCalculationProgressBar vg="{vg}" horizontalCenter="0" width="250"/>
+		<s:Group left="0" right="0" top="0" bottom="0" includeInLayout="false" id="workArea">
+			<navigator:GraphNavigator id="navigator" visible="false" includeInLayout="false" title="Навигатор" vg="{vg}" width="250" height="250" parentBorder="{vg}" close="closeNavigator()"/>
+			<search:SearchDialog id="search" visible="false" initialPos="right" includeInLayout="false" vg="{vg}" parentBorder="{vg}" close="closeSearchDialog()"/>
+			<settings:SettingsDialog id="settings" visible="false" includeInLayout="false" vg="{vg}" parentBorder="{vg}" close="closeSettingsDialog()"/>
+		</s:Group>
+		<s:BorderContainer bottom="0" left="0" id="statusBar" visible="false" includeInLayout="false">
+			<s:layout>
+				<s:HorizontalLayout gap="4" verticalAlign="middle" paddingLeft="4" paddingRight="8"/>
+			</s:layout>
+			<controls:LinkButton id="cancelButton" icon="{Assets.CANCEL_SMALL}" width="20" height="20" toolTip="Отменить раскрытие объектов" click="cancelClick()"/>
+			<s:Label id="statusLabel" paddingTop="1"/>
+		</s:BorderContainer>
+	</s:Group>
+</s:Application>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="300" height="325" title="Выберите результат объединения" icon="{Assets.UNION_SMALL}" creationComplete="creationComplete()">
+	<fx:Script source="resultgroupobjectselectiondialog.as" />
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="right" paddingLeft="8" paddingRight="8" paddingBottom="8" paddingTop="8"/>
+	</s:layout>
+	<s:List id="objectList" width="100%" height="250" styleName="withAlternatingItemColors" itemRenderer="ui.search.GraphSearchResultRenderer" horizontalScrollPolicy="off" change="onObjectListChanged()" doubleClickEnabled="true" doubleClick="onSelect()"/>
+	<s:Group width="100%">
+		<s:layout>
+			<s:HorizontalLayout horizontalAlign="right" />
+		</s:layout>
+		<mx:Button id="selectButton" label="Выбрать" icon="{Assets.OK_ICON}" click="onSelect()"/>
+	</s:Group>
+</s:TitleWindow>

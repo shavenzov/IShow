@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:ui="ui.controls.*"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" verticalAlign="middle" styleName="subMenuTip" borderSkin="mx.skins.halo.ToolTipBorder" width="220" verticalScrollPolicy="off" horizontalScrollPolicy="off" paddingBottom="8" paddingLeft="8" paddingTop="8" paddingRight="8" creationComplete="onCreationComplete()">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.SliderEvent;
+			import mx.managers.history.History;
+			import mx.skins.halo.ToolTipBorder;
+			
+			import org.un.cava.birdeye.ravis.graphLayout.visual.IVisualGraph;
+			import org.un.cava.birdeye.ravis.history.LayoutParamsChanged;
+			
+			public var vg : IVisualGraph;
+			
+			private function onLinkLengthChanged( e : SliderEvent ) : void
+			{
+				History.add( new LayoutParamsChanged( vg ) );
+				
+				vg.layouter.fitToWindow    = false;
+				vg.layouter.autoFitEnabled = false;
+				vg.layouter.linkLength     = e.value;
+				vg.draw();
+			}
+			
+			private static const MAX_LINK_LENGTH : Number = 600.0;
+			private static const MIN_LINK_LENGTH : Number = 20.0; 
+			
+			private function onCreationComplete() : void
+			{
+				var ll : Number = vg.layouter.linkLength;
+				
+				if ( ll < MAX_LINK_LENGTH )
+				{
+					linkLengthSlider.maximum = MAX_LINK_LENGTH;
+				}
+				else
+				{
+					linkLengthSlider.maximum = ll + Math.round( ll / 3 );
+				}
+				
+				linkLengthSlider.minimum = MIN_LINK_LENGTH;
+				linkLengthSlider.value   = ll;
+				
+				linkLengthSlider.tickValues = [ linkLengthSlider.minimum, linkLengthSlider.maximum ];
+			}
+			
+		]]>
+	</fx:Script>
+	<ui:ExtendedHSlider width="100" id="linkLengthSlider" tickInterval="1.0" snapInterval="1.0" liveDragging="false" change="onLinkLengthChanged( event )" label="Длина связей"/>
+</mx:VBox>

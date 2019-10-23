@@ -1,0 +1,160 @@
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace controls "com.controls.*";
+
+@font-face{
+	src:url('/assets/fonts/CALIBRI.TTF');
+	unicode-range:
+		U+0020-U+0040, /* Punctuation, Numbers */
+		U+0041-U+005A, /* Upper-Case A-Z */
+		U+005B-U+0060, /* Punctuation and Symbols */
+		U+0061-U+007A, /* Lower-Case a-z */
+		U+007B-U+007E, /* Punctuation and Symbols */
+		U+00FC-U+00FD, /* UE */
+		U+0410-U+042F, /* Cyrillic Upper-Case */
+		U+0430-U+0451; /* Cyrillic Lower-Case */  
+	font-family:Calibri;
+	font-weight:normal;
+	embedAsCFF:true;
+}
+
+@font-face{
+src:url('/assets/fonts/CALIBRIB.TTF');
+unicode-range:
+U+0020-U+0040, 
+U+0041-U+005A, 
+U+005B-U+0060, 
+U+0061-U+007A, 
+U+007B-U+007E, 
+U+00FC-U+00FD, 
+U+0410-U+042F, 
+U+0430-U+0451;   
+font-family:Calibri;
+font-weight:bold;
+embedAsCFF:true;
+}
+
+s|Application {
+	fontFamily:Calibri;
+	font-size:12;
+	focus-color:#EF8200;
+	focus-alpha:0.5;
+	modalTransparencyBlur:2;
+	modalTransparencyColor:#000000;
+	modalTransparencyDuration:300;	
+}
+
+s|List{
+  rollOverColor  : #fff5dd;
+  selectionColor : #fceab0;
+}
+
+s|TitleWindow{
+  backgroundColor:#cad7ea;
+}
+
+s|BorderContainer{
+	backgroundColor:#cad7ea;	
+}
+
+.withAlternatingItemColors{
+	alternating-item-colors : #FFFFFF, #fafafa;
+}
+
+mx|global
+{
+	textFieldClass : ClassReference( "mx.core.UIFTETextField" );
+	fontFamily:Calibri;
+	borderColor:#afbed5;
+	chromeColor:#9fa9b7;
+}
+
+mx|ToolTip {
+	color : #000000;
+	font-size : 14px;
+	background-color : #fdfdd3;
+	background-alpha : 0.85;
+	border-color : #fdfdd3;
+	border-style : solid; 
+	border-alpha : 0.85;
+	corner-radius : 6;
+	drop-shadow-visible : false;
+	font-weight : normal;
+}
+
+mx|Button{
+	skin : ClassReference( "mx.skins.halo.ButtonSkin" );	
+}
+
+mx|LinkButton{
+ skin : ClassReference( "mx.skins.halo.ToggleLinkButtonSkin" );
+ rollOverColor : #f6d388;
+ selectionColor : #f5d38a;
+ cornerRadius : 0;
+}
+
+mx|ProgressBar{
+	barColor:	#0099FF;
+	borderColor : #C8C8C8;
+	barSkin: ClassReference( "mx.skins.halo.ProgressBarSkin" );
+	trackSkin: ClassReference( "mx.skins.halo.ProgressTrackSkin" );
+	disabledColor:#000000;
+}
+
+mx|Menu{
+  rollOverColor:#fff4d6;
+  paddingTop:0;
+  paddingBottom:0;
+  paddingLeft:0;
+  paddingRight:0;
+  horizontalGap:8;
+  borderColor:#ababab;
+  drop-shadow-visible : false;
+}
+
+.toolTip{
+	color : #000000;
+	font-size : 14px;
+	background-color : #fdfdd3;
+	background-alpha : 0.85;
+	border-color : #fdfdd3;
+	border-style : solid; 
+	border-alpha : 0.85;
+	corner-radius : 6;
+	drop-shadow-visible : false;
+	font-weight:normal;
+}
+
+.errorTip { 
+	color : #ffffff;
+	font-size : 14px;
+	background-color : #ff0000;
+	background-alpha : 0.85;
+	border-color : #ff0000;
+	border-style : solid; 
+	border-alpha : 0.85;
+	corner-radius : 6;
+	drop-shadow-visible : true;
+	font-weight:normal;  
+}
+
+.subMenuTip{
+	border-color : #cad7ea;
+	corner-radius : 6;
+	drop-shadow-visible : true;
+}
+
+.controlPanelSubMenuTip{
+	border-color : #cad7ea;
+	corner-radius : 6;
+	drop-shadow-visible : true;	
+}
+
+controls|BGLabel{
+    color:#ffffff;	
+}
+
+controls|ArrowLabel{
+	color:#ffffff;	
+}
+

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:controls="com.controls.*"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="320" height="405" icon="{Assets.EDIT_SMALL}" enabled.loading="false"
+		 title="Свойства объекта" creationComplete="onCreationComplete()">
+	<fx:Script source="nodepropertiesdialog.as" />
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="loading" />
+	</s:states>
+	<s:currentState>normal</s:currentState>
+	<s:layout>
+		<s:VerticalLayout paddingTop="4" paddingLeft="4" paddingRight="4"/>
+	</s:layout>
+	<!--Название узла -->
+	<s:Group width="100%">
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
+		<s:Label text="Название" />
+		<s:TextArea width="100%" height="40" id="objectName" change="checkObjectNameField()"/>
+	</s:Group>
+	<!--Название узла -->
+	<!--Описание узла -->
+	<s:Group width="100%">
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
+		<s:Label text="Описание" />
+		<s:TextArea width="100%" height="80" id="objectDesc"/>
+	</s:Group>
+	<!--Описание узла -->
+	<!--Иконка объекта -->
+	<s:Group width="100%">
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
+		<s:Label text="Иконка" />
+		<s:Group width="100%" height="150">
+			<s:List left="0" right="0" top="0" bottom="0" id="icons" itemRenderer="com.controls.renderers.IconItemRenderer">
+				<s:layout>
+					<s:TileLayout verticalGap="0" horizontalGap="0" horizontalAlign="center" verticalAlign="middle"/>
+				</s:layout>
+			</s:List>
+			<controls:LabeledIndicator visible.normal="false" id="indicator" horizontalCenter="0" verticalCenter="0"/>
+		</s:Group>
+	</s:Group>
+	<!--Иконка объекта -->
+	<s:Group width="100%">
+		<s:layout>
+			<s:HorizontalLayout />
+		</s:layout>
+		<s:Group width="50%" >
+	     <s:layout>
+			 <s:HorizontalLayout />
+		 </s:layout>
+			<s:Button label="Закрыть" width="80" click="closeButtonClick()"/>
+		</s:Group>
+		<s:Group width="50%" >
+			<s:layout>
+				<s:HorizontalLayout horizontalAlign="right"/>
+			</s:layout>
+			<s:Button label="Применить" width="80" click="applyButtonClick()"/>
+		</s:Group>
+	</s:Group>
+</s:TitleWindow>

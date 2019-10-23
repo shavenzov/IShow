@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx"
+				xmlns:renderers="ui.dialogs.renderers.*"
+				autoDrawBackground="true">
+	<s:layout>
+		<s:HorizontalLayout verticalAlign="middle" paddingTop="4" paddingLeft="4" paddingBottom="8" paddingRight="28" gap="28"/>
+	</s:layout>
+	<s:Label id="weightNumber" fontWeight="bold"/>
+	<renderers:ArrowRenderer id="arrow" width="100%"/>
+	<fx:Script>
+		<![CDATA[
+			override public function set data( value : Object ) : void
+			{
+				super.data = value;
+				
+				weightNumber.text = data.weight.toString() + ' пикс.';
+				arrow.data = data;
+			}
+		]]>
+	</fx:Script>
+</s:ItemRenderer>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" title="Удаление связи" icon="{Assets.DELETE_SMALL}" width="280" height="135" creationComplete="onCreationComplete()">
+	<fx:Script source="removerelationdialog.as" />
+	
+	<s:layout>
+		<s:VerticalLayout paddingLeft="8" paddingRight="8" paddingTop="8"/>
+	</s:layout>
+	
+	<s:Group width="100%">
+		<s:layout>
+			<s:HorizontalLayout verticalAlign="middle"/>
+		</s:layout>
+		<mx:Image source="{Assets.EDGE_ICON}" />
+		<s:Label id="promptText" fontWeight="bold" />
+	</s:Group>
+	
+	<s:CheckBox label="Сохранить в базе данных" id="saveToDBCheckBox" />
+	
+	<s:Group width="100%">
+		<s:layout>
+			<s:HorizontalLayout paddingTop="8" horizontalAlign="right" />
+		</s:layout>
+		<s:Button width="80" height="24" label="Отмена" click="close()"/>
+		<s:Button width="80" height="24" label="Удалить" click="removeButtonClick()"/>
+	</s:Group>
+	
+</s:TitleWindow>

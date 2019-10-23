@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data:SavedTitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   xmlns:data="com.data.*"
+					   xmlns:controls="com.controls.*"
+					   icon="{Assets.SETTINGS_ICON_SMALL}" title="Настройка" height="92" width="323" creationComplete="onCreationComplete()">
+	<fx:Script source="settingsdialog.as" />
+	<data:layout>
+		<s:HorizontalLayout paddingLeft="4" paddingTop="4" paddingRight="4" paddingBottom="4" gap="2"/>
+	</data:layout>
+	<s:BorderContainer borderColor="#c6c6c6" borderAlpha="1.0" height="100%">
+		<s:layout>
+			<s:VerticalLayout gap="0"/>
+		</s:layout>
+		<s:Group>
+			<controls:BGLabel text="Длина связей :" width="125"/>
+			<controls:PopupLinkButton left="82" top="-1" id="linkLengthButton" label="300" color="0xffffff" toolTip="Щелкните для изменения длины связей" click="onLinkLengthButtonClick( event )"/>
+		</s:Group>
+		<s:Group width="100%">
+			<s:layout>
+				<s:HorizontalLayout horizontalAlign="center" verticalAlign="middle" gap="4" paddingLeft="4" paddingRight="4" paddingTop="2" paddingBottom="4"/>
+			</s:layout>
+			<controls:LinkButton id="autoFitEnabledButton" width="24" height="24" icon="{Assets.OPTIMAL_SIZE}" toolTip="Оптимальная" click="autoFitEnabledButtonClick()"/>
+			<controls:LinkButton id="fitToWindowButton" width="24" height="24" icon="{Assets.FIT_TO_WINDOW}" toolTip="Подбирать под размер рабочей области" click="fitToWindowButtonClick()"/>
+			<!--
+			<controls:LinkButton width="24" height="24" icon="{Assets.CUSTOM_LINK_LENGTH}" toolTip="Другая"/>
+			-->
+		</s:Group>
+	</s:BorderContainer>
+	<s:BorderContainer borderColor="#c6c6c6" borderAlpha="1.0" height="100%">
+		<s:layout>
+			<s:VerticalLayout gap="0"/>
+		</s:layout>
+		<controls:BGLabel text="Раскрытие объектов" width="100%"/>
+		<s:Group>
+			<s:layout>
+				<s:HorizontalLayout paddingLeft="4" paddingRight="4" paddingTop="2" paddingBottom="4" gap="4" />
+			</s:layout>
+			<controls:LinkButton width="24" height="24" icon="{Assets.REFRESH_SMALL}" id="refreshOnRedrawButton" toolTip="Перерисовывать при раскрытии" click="refreshOnRedrawButtonClick()"/>
+			<controls:Spacer height="100%" />
+			<s:Group height="100%">
+				<s:layout>
+					<s:HorizontalLayout gap="0" paddingLeft="2" verticalAlign="middle" />
+				</s:layout>
+				<s:Label fontWeight="bold" paddingTop="1" text="Глубина : " />
+				<controls:PopupLinkButton id="depthButton" label="2" toolTip="Щелкните для изменения глубины раскрытия объектов" click="depthButtonClick( event )"/>
+			</s:Group>
+		</s:Group>	
+	</s:BorderContainer>
+	<s:BorderContainer borderColor="#c6c6c6" borderAlpha="1.0" height="100%">
+		<s:layout>
+			<s:VerticalLayout gap="0"/>
+		</s:layout>
+		<controls:BGLabel text="Другое" width="100%"/>
+		<s:Group>
+			<s:layout>
+				<s:HorizontalLayout paddingLeft="4" paddingRight="4" paddingTop="2" paddingBottom="4" gap="4" />
+			</s:layout>
+			<controls:LinkButton width="24" height="24" icon="{Assets.ANIMATE}" id="animateButton" toolTip="Анимировать перерисовку" click="animateButtonClick()"/>
+			<controls:LinkButton width="24" height="24" icon="{Assets.SHOW_SYMBOL}" id="showEdgeLabelsButton" toolTip="Отображать имена связей" click="showEdgeLabelsButtonClick()"/>
+		</s:Group>	
+	</s:BorderContainer>
+</data:SavedTitleWindow>

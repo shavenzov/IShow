@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<saved:SavedTitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:saved="com.data.*"
+			   xmlns:mx="library://ns.adobe.com/flex/mx" icon="{Assets.SEARCH_ICON}" title="Поиск" width="300" height.result="455" height.notFound="170" height.normal="136" creationComplete="onShow()" show="onShow()">
+	<fx:Script source="searchdialog.as" />
+	
+	<saved:states>
+		<s:State name="normal" />
+		<s:State name="notFound" />
+		<s:State name="result" />
+	</saved:states>
+	
+	<saved:transitions>
+		<s:Transition fromState="normal" toState="result">
+			<s:Sequence>
+				<s:Resize target="{this}" />
+				<s:Fade target="{resultGroup}" />	
+			</s:Sequence>
+		</s:Transition>
+		<s:Transition fromState="notFound" toState="result">
+			<s:Sequence>
+				<s:Fade target="{notFoundGroup}" />
+				<s:Resize target="{this}" />
+				<s:Fade target="{resultGroup}" />	
+			</s:Sequence>
+		</s:Transition>
+		<s:Transition toState="normal">
+			<s:Sequence>
+				<s:Fade target="{resultGroup}" />	
+				<s:Resize target="{this}" />
+			</s:Sequence>
+		</s:Transition>
+		<s:Transition fromState="normal" toState="notFound">
+			<s:Sequence>
+				<s:Resize target="{this}" />
+				<s:Fade target="{notFoundGroup}" />
+			</s:Sequence>
+		</s:Transition>
+		<s:Transition fromState="result" toState="notFound">
+			<s:Sequence>
+				<s:Fade target="{resultGroup}" />
+				<s:Resize target="{this}" />
+				<s:Fade target="{notFoundGroup}" />
+			</s:Sequence>
+		</s:Transition>
+	</saved:transitions>
+	
+	<saved:currentState>normal</saved:currentState>
+	
+  <saved:layout>
+	  <s:VerticalLayout paddingLeft="8" paddingRight="8" paddingBottom="8" paddingTop="8"/>
+  </saved:layout>
+  
+  <!--строка поиска-->
+  
+  <s:Group width="100%">
+	  <s:layout>
+		  <s:HorizontalLayout />
+	  </s:layout>
+	  <s:TextInput width="100%" id="searchString" change="onSearchStringChanged()" enter="searchButtonClick()"/>
+	  <mx:Button label="Найти" icon="{Assets.SEARCH_ICON}" click="searchButtonClick()"/>
+  </s:Group>	
+	
+  <!--             -->
+	
+  <!--параметры поиска-->
+	
+  <s:Group width="100%">
+	     <s:layout>
+			 <s:VerticalLayout />
+		 </s:layout>
+		 <s:Label text="Параметры поиска:" />
+	 <s:Group width="100%" id="searchParamsGroup">
+	  <s:layout>
+		  <s:HorizontalLayout />
+	  </s:layout>
+	  <s:Group width="50%">
+		  <s:layout>
+			  <s:VerticalLayout />
+		  </s:layout>
+		  <s:CheckBox label="Искать в объектах" id="searchInNodes" selected="true" click="checkBoxSelected()"/>
+		  <s:CheckBox label="Искать в связях" id="searchInEdges" click="checkBoxSelected()"/>
+	  </s:Group>
+	  <s:Group width="50%">
+		  <s:layout>
+			  <s:VerticalLayout />
+		  </s:layout>
+		  <s:CheckBox label="Искать слово целиком" id="wholeWord"/>
+		  <s:CheckBox label="Искать с учетом регистра" id="caseSensitive"/>
+	  </s:Group>
+	 </s:Group>
+  </s:Group>	
+	
+  <!--                -->
+ 
+  <!-- Ничего не найдено -->
+  
+  <s:BorderContainer id="notFoundGroup" width="100%" borderColor="#C80000" includeIn="notFound" alpha.normal="0" alpha.result="0" alpha.notFound="1" creationComplete="updateNotFound()">
+	  <s:layout>
+		  <s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
+	  </s:layout>
+	  <s:Label id="notFound" color="#C80000" />
+  </s:BorderContainer>	
+	
+  <!--                   -->	
+	
+  <!--Результаты поиска-->
+  
+  <s:Group width="100%" id="resultGroup" includeIn="result" alpha.normal="0" alpha.notFound="0" alpha.result="1">
+	  <s:layout>
+		  <s:VerticalLayout />
+	  </s:layout>
+	  <s:Group width="100%">
+		  <s:layout>
+			  <s:HorizontalLayout verticalAlign="bottom"/>
+		  </s:layout>
+		  <s:Label id="foundCount" />
+		  <s:Group width="100%">
+			  <s:layout>
+				  <s:HorizontalLayout horizontalAlign="right"/>
+			  </s:layout>
+			  <mx:Button icon="{Assets.PREV_ICON}" id="prevResultButton" enabled="false" width="24" height="24" click="prevResultButtonClick()"/>
+			  <mx:Button icon="{Assets.NEXT_ICON}" id="nextResultButton" enabled="false" width="24" height="24" click="nextResultButtonClick()"/>
+		  </s:Group>
+	  </s:Group>
+	  <s:List styleName="withAlternatingItemColors" id="result" width="100%" height="284" itemRenderer="ui.search.GraphSearchResultRenderer" horizontalScrollPolicy="off" creationComplete="updateResult()" change="onResultSelectedIndexChanged( event )"/>
+  </s:Group>	
+	
+  <!--                 -->
+	
+</saved:SavedTitleWindow>

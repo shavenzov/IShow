@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:nodes="org.un.cava.birdeye.ravis.components.renderers.nodes.*"
+			   xmlns:edges="ui.dialogs.renderers.*"
+			   xmlns:controls="com.controls.*"
+			   width="350" height="368" title="Создание связи" creationComplete="onCreationComplete()" enabled.loading="false" icon="{Assets.EDGE_ICON}">
+	<fx:Script>
+		<![CDATA[
+			import org.un.cava.birdeye.ravis.assets.Assets;
+		]]>
+	</fx:Script>
+	    <fx:Script source="addrelationdialog.as" />
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="loading" />
+	</s:states>
+	<s:currentState>loading</s:currentState>
+	    <s:layout>
+			<s:VerticalLayout paddingTop="8" paddingLeft="8" paddingRight="8" />
+		</s:layout>
+		<s:Group width="100%">
+		 <s:layout>
+			 <s:HorizontalLayout gap="0" />
+		 </s:layout>
+		 <nodes:TextIconNodeRenderer id="node1View" mouseEnabled="false"/>
+		 <edges:ArrowRenderer id="edgeView" width="100%"/>
+		 <nodes:TextIconNodeRenderer id="node2View" mouseEnabled="false"/>	
+		</s:Group>
+	    <s:Group width="100%">
+			<s:layout>
+				<s:VerticalLayout gap="4" paddingTop="8"/>
+			</s:layout>
+			<s:Label text="Тип связи:" />
+			<s:Group width="100%" height="128">
+				<s:List id="relationTypes" left="0" right="0" top="0" bottom="0" itemRenderer="ui.dialogs.renderers.ClassRelationRenderer" styleName="withAlternatingItemColors" change="onListChanged( event )"/>
+				<controls:LabeledIndicator visible.normal="false" id="indicator" horizontalCenter="0" verticalCenter="0"/>
+			</s:Group>
+		</s:Group>	
+		<s:CheckBox label="Сохранить в базе данных" selected="true" id="saveToDBCheckBox" />
+	    <s:Group width="100%">
+			<s:layout>
+				<s:HorizontalLayout paddingTop="8" horizontalAlign="right" />
+			</s:layout>
+			<s:Button width="80" height="24" label="Отмена" click="close()"/>
+			<s:Button width="80" height="24" label="Создать" id="createButton" enabled="false" click="createEdgeButtonClick()"/>
+		</s:Group>
+</s:TitleWindow>

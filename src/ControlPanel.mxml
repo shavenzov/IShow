@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<saved:SavedBorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark"
+				   xmlns:controls="com.controls.*"
+				   xmlns:ui="ui.controls.*"
+				   xmlns:saved="com.data.*"
+				   xmlns:flexlib="flexlib.containers.*"
+				   xmlns:mx="library://ns.adobe.com/flex/mx" dropShadowVisible="false" height="30" backgroundColor="#cad7ea" creationComplete="onCreationComplete()" initialize="onInitialized()">
+	<fx:Script source="controlpanel.as" />
+	<fx:Metadata>
+		[Event(name="openNavigator", type="flash.events.Event")]
+		[Event(name="closeNavigator", type="flash.events.Event")]
+		[Event(name="openSearchDialog", type="flash.events.Event")]
+		[Event(name="closeSearchDialog", type="flash.events.Event")]
+		[Event(name="openSettingsDialog", type="flash.events.Event")]
+		[Event(name="closeSettingsDialog", type="flash.events.Event")]
+		[Event(name="openHelp", type="flash.events.Event")]
+	</fx:Metadata>
+    
+	<saved:layout>
+		<s:HorizontalLayout verticalAlign="top" paddingLeft="4" paddingRight="4" paddingTop="2"/>
+	</saved:layout>
+	
+	<controls:LinkButton icon="{Assets.SAVE_ICON}" id="saveButton" width="24" height="24" click="onSaveAsButtonClick(event)" toolTip="Сохранить граф" />
+	<controls:Spacer height="24" id="saveButtonSpacer"/>
+	
+	<!-- Кнопка отмены действий -->
+	
+	<s:Group  height="100%" id="historyButtons">
+		<s:layout>
+			<s:HorizontalLayout verticalAlign="top" gap="4"/>
+		</s:layout>
+		<controls:LinkButton id="undoButton" icon="{Assets.UNDO_ICON}" toolTip="Отменить ( ctrl + z )" width="24" height="24" click="undoButtonClick()"/>
+		<controls:LinkButton id="redoButton" icon="{Assets.REDO_ICON}" toolTip="Повторить ( ctrl + y )" width="24" height="24" click="redoButtonClick()"/>
+	</s:Group>
+	
+	<controls:Spacer height="24" id="historyButtonsSpacer"/>
+	
+	<s:Group width="24" height="24" id="scrollModeButton">
+		<controls:LinkButton width="24" height="24" id="handScrollModeButton" click="onHandScrollModeButtonClick()"/>
+		<mx:Image source="{Assets.HAND_SMALL_ICON}" horizontalCenter="0" verticalCenter="0" mouseEnabled="false" mouseChildren="false"/>
+	</s:Group>
+	
+	<controls:Spacer height="24" id="scrollModeButtonSpacer"/>
+	
+	<!-- -->
+	
+	<!--Кнопочки "Раскрыть выбранные объекты","Открыть карточки выбранныx объектов"-->
+	
+	<s:Group height="100%" id="expandButtonGroup">
+		<s:layout>
+			<s:HorizontalLayout gap="0" verticalAlign="top"/>
+		</s:layout>
+		<controls:LinkButton id="expandButton" icon="{Assets.EXPAND_ICON}" width="24" height="24" toolTip="Раскрыть выбранные объекты" click="expandButtonClick( event )"/>
+	</s:Group>
+	
+	<!-- -->
+	
+	<controls:Spacer height="24" id="expandButtonGroupSpacer"/>
+	
+	<s:Group height="100%" id="animateEdgesDirectionButtonGroup">
+		<s:layout>
+			<s:HorizontalLayout gap="0" verticalAlign="top"/>
+		</s:layout>
+		<controls:LinkButton id="animateEdgesDirectionButton" toggle="true" icon="{Assets.ANIMATE_EDGES_DIRECTION}" width="24" height="24" toolTip="Анимировать направление связей выбранных объектов" click="animateEdgesDirectionButtonClick()"/>
+	</s:Group>
+	
+	<controls:Spacer height="24" id="animateEdgesDirectionButtonSpacer"/>
+	
+	<s:Group height="100%" id="zoomGroup">
+		<s:layout>
+			<s:HorizontalLayout gap="0" verticalAlign="top"/>
+		</s:layout>
+		<controls:LinkButton name="zoomInButton" id="zoomInButton" icon="{Assets.ZOOM_IN_SMALL}" autoRepeat="true" width="24" height="24" toolTip="Увеличить (+)" buttonDown="zoomInClick()"/>
+		<controls:LinkButton name="zoomOutButton" id="zoomOutButton" icon="{Assets.ZOOM_OUT_SMALL}" autoRepeat="true" width="24" height="24" toolTip="Уменьшить (-)" buttonDown="zoomOutClick()"/>
+	</s:Group>
+	<controls:Spacer height="24" id="zoomGroupSpacer"/>
+	<controls:LinkButton id="openNavigatorButton" icon="{Assets.NAVIGATOR_ICON_SMALL}" width="24" height="24" toolTip="Навигатор" click="openNavigator()"/>
+	<controls:Spacer height="24" id="openNavigatorSpacer"/>
+	
+	<!--Раскладка-->
+	
+	<s:Group id="layoutAndScaleGroup" height="100%">
+		<s:layout>
+			<s:VerticalLayout gap="-8" paddingTop="-5" verticalAlign="middle"/>
+		</s:layout>
+		<s:Group id="layoutGroup">
+			<s:layout>
+				<s:HorizontalLayout gap="0" verticalAlign="middle"/>
+			</s:layout>
+			<s:Label text="Раскладка : " fontWeight="bold"/>
+			<controls:PopupLinkButton id="layoutSelector" toolTip="Щелкните для выбора раскладки" click="onLayoutButtonClick(event)"/>
+		</s:Group>
+		<s:Group id="scaleGroup">	
+			<s:layout>
+				<s:HorizontalLayout gap="0" verticalAlign="middle"/>
+			</s:layout>
+			<s:Label text="Масштаб   : " fontWeight="bold"/>
+			<controls:PopupLinkButton id="scaleButton" label="100%" toolTip="Щелкните для изменения масштаба" click="onScaleButtonClick(event)"/>
+		</s:Group>
+	</s:Group>
+	
+	<!-- -->
+	
+	<controls:Spacer height="24" id="layoutAndScaleSpacer"/>
+	
+	<s:Group id="openSettingsGroup">
+		<s:layout>
+			<s:HorizontalLayout gap="4"/>
+		</s:layout>
+		<controls:LinkButton id="openSettingsButton" icon="{Assets.SETTINGS_ICON_SMALL}" width="24" height="24" toolTip="Настройка" click="openSettings()"/>
+		<controls:Spacer height="24" />
+	</s:Group>
+	
+	
+	<s:Group width="100%">
+		<s:layout>
+			<s:HorizontalLayout gap="4" horizontalAlign="right"/>
+		</s:layout>
+		<controls:Spacer height="24" id="searchButtonSpacer"/>
+		<controls:LinkButton id="searchButton" icon="{Assets.SEARCH_ICON}" label="Поиск" toolTip="Поиск ( ctrl + f )" height="24" click="searchButtonClick()"/>
+		<controls:Spacer height="24" id="helpButtonSpacer"/>
+		<controls:LinkButton id="helpButton" icon="{Assets.HELP_ICON}" width="24" height="24" toolTip="Информация о приложении" click="helpClick()"/>
+	</s:Group>
+	
+</saved:SavedBorderContainer>

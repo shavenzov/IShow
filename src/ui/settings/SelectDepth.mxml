@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:ui="ui.controls.*"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" verticalAlign="middle" styleName="subMenuTip" borderSkin="mx.skins.halo.ToolTipBorder" width="86" verticalScrollPolicy="off" horizontalScrollPolicy="off" paddingBottom="8" paddingLeft="8" paddingTop="8" paddingRight="8" xmlns:controls="com.controls.*" creationComplete="onCreationComplete()">
+	<fx:Script>
+		<![CDATA[
+			import com.bs.amg.UnisVisualGraphMediator;
+			import com.managers.HintManager;
+			
+			import mx.events.CloseEvent;
+			import mx.managers.history.History;
+			
+			import org.un.cava.birdeye.ravis.history.SimpleDataParamChanged;
+			
+			public var vgMediator : UnisVisualGraphMediator;
+			
+			private var buttons : Array;
+			
+			private function onCreationComplete() : void
+			{
+				buttons = [ select1, select2, select3, select4 ];
+				
+				if ( vgMediator.depth <= buttons.length )
+				{
+					var b : LinkButton = buttons[ vgMediator.depth - 1 ];
+					
+					b.selected = true;
+					b.mouseEnabled = false;
+				}
+			}
+			
+			private function selectClick( e : MouseEvent ) : void
+			{
+				var index : int = buttons.indexOf( e.currentTarget );
+				
+				if ( index > -1 )
+				{
+					var operation : SimpleDataParamChanged = new SimpleDataParamChanged( vgMediator );
+					    operation.dumpBefore();
+					
+					vgMediator.depth = index + 1;
+					
+					operation.dumpAfter();
+					History.add( operation );
+					
+					dispatchEvent( new CloseEvent( CloseEvent.CLOSE ) );
+					HintManager.hideAll();
+				}
+			}
+		]]>
+	</fx:Script>
+	<mx:Tile width="100%">
+		<controls:LinkButton id="select1" label="1" click="selectClick( event )"/>
+		<controls:LinkButton id="select2" label="2" click="selectClick( event )"/>
+		<controls:LinkButton id="select3" label="3" click="selectClick( event )"/>
+		<controls:LinkButton id="select4" label="4" click="selectClick( event )"/>
+	</mx:Tile>
+</mx:VBox>

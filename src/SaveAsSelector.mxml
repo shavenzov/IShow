@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:controls="com.controls.*"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"  styleName="controlPanelSubMenuTip" borderSkin="mx.skins.halo.ToolTipBorder" horizontalAlign="left" verticalScrollPolicy="off" horizontalScrollPolicy="off" width="240" paddingBottom="8" paddingLeft="8" paddingTop="8" paddingRight="8">
+	<fx:Script>
+		<![CDATA[
+			import com.managers.HintManager;
+			
+			import org.un.cava.birdeye.ravis.assets.Assets;
+			
+			public static const SAVE_TO_CLOUD_CLICK : String = 'SAVE_TO_CLOUD_CLICK';
+			public static const SAVE_AS_JPEG_CLICK  : String = 'SAVE_AS_JPEG_CLICK';
+			public static const SAVE_AS_PNG_CLICK   : String = 'SAVE_AS_PNG_CLICK';
+			
+			private function onSaveToCloudClick() : void
+			{
+				dispatchEvent( new Event( SAVE_TO_CLOUD_CLICK ) );
+			}
+			
+			private function onSaveAsJPEGClick() : void
+			{
+				dispatchEvent( new Event( SAVE_AS_JPEG_CLICK ) );
+			}
+			
+			private function onSaveAsPNGClick() : void
+			{
+				dispatchEvent( new Event( SAVE_AS_PNG_CLICK ) );
+			}
+			
+		]]>
+	</fx:Script>
+	<controls:LinkButton icon="{Assets.SAVE_TO_CLOUD_ICON_SMALL}" height="32" width="100%" label="Сохранить в Базе Данных" textAlign="left" click="onSaveToCloudClick()"/>
+	<controls:LinkButton icon="{Assets.JPEG_ICON_SMALL}" height="32" width="100%" label="Сохранить как изображение JPEG" textAlign="left" click="onSaveAsJPEGClick()"/>
+	<controls:LinkButton icon="{Assets.PNG_ICON_SMALL}" height="32" width="100%" label="Сохранить как изображение PNG" textAlign="left" click="onSaveAsPNGClick()"/>
+</mx:VBox>

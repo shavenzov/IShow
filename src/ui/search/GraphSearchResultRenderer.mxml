@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true" width="100%">
+	<fx:Script source="graphsearchresultrenderer.as" />
+	<s:layout>
+		<s:VerticalLayout paddingTop="4" paddingLeft="4" paddingBottom="4" paddingRight="4"/>
+	</s:layout>
+	<s:Group width="100%">
+		<s:layout>
+			<s:HorizontalLayout gap="8" verticalAlign="middle"/>
+		</s:layout>
+		<s:Group height="100%" id="iconGroup">
+			<s:layout>
+				<s:HorizontalLayout verticalAlign="top" />
+			</s:layout>
+		</s:Group>
+		<s:Label id="nameLabel" width="100%" fontWeight="bold"/> 
+	</s:Group>
+	<!--
+	<s:Label width="100%" id="desc" />
+	-->
+</s:ItemRenderer>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:controls="com.controls.*"
+		 width="200" height="100" title.encoding="Кодирую..." title.readyToSave="Готово" title.saving="Сохраняю...">
+	<s:states>
+		<s:State name="encoding" stateGroups="progress"/>
+		<s:State name="readyToSave" />
+		<s:State name="saving" stateGroups="progress"/>
+	</s:states>
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</s:layout>
+	<s:Group includeIn="progress">
+		<s:layout>
+			<s:VerticalLayout gap="0" paddingTop="20"/>
+		</s:layout>
+		<mx:ProgressBar id="progressBar" mode="manual" width="180" indeterminate="true" label="Секундочку..." labelPlacement="center"/>
+	</s:Group>
+	<s:Group includeIn="readyToSave">
+		<controls:MultilineButton id="saveButton" verticalCenter="0" horizontalCenter="0" width="150" height="50" label='Щелкните здесь для сохранения файла на компьютере...' />
+	</s:Group>
+	<s:Group width="100%" height="100%" includeIn="encoding,saving">
+		<s:layout>
+			<s:HorizontalLayout horizontalAlign="right" verticalAlign="middle" paddingRight="10" paddingBottom="20"/>
+		</s:layout>
+		<mx:Button label="Отмена" id="cancelButton" />		
+	</s:Group>
+</s:TitleWindow>

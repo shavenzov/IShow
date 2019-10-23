@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="320" height="380"
+		 title="Свойства связи" icon="{Assets.EDIT_SMALL}" creationComplete="onCreationComplete()">
+	<fx:Script source="edgepropertiesdialog.as" />
+	<s:layout>
+		<s:VerticalLayout paddingTop="4" paddingLeft="4" paddingRight="4"/>
+	</s:layout>
+	<!--Название связи -->
+	<s:Group width="100%">
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
+		<s:Label text="Название" />
+		<s:TextArea width="100%" height="40" id="edgeName"/>
+	</s:Group>
+	<!--Название связи -->
+	<!--Описание связи -->
+	<s:Group width="100%">
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
+		<s:Label text="Описание" />
+		<s:TextArea width="100%" height="80" id="edgeDesc" />
+	</s:Group>
+	<!--Описание связи -->
+	<!--Тип связи-->
+	<s:Group width="100%">
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
+		<s:Label text="Тип связи" />
+		<s:DropDownList id="edgeArrow" width="100%" change="onEdgeArrowChanged( event )"/>
+	</s:Group>
+	<!--Тип связи-->
+	<!--Толщина связи-->
+	<s:Group width="100%">
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
+		<s:Label text="Толщина" />
+		<s:DropDownList id="edgeWeight" width="100%" itemRenderer="ui.dialogs.renderers.EdgeArrowItemRenderer"/>
+	</s:Group>
+	<!--Толщина связи-->
+	<!--Цвет-->
+	<s:Group width="100%">
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
+		<s:Label text="Цвет" />
+		<s:Group width="100%">
+			<s:layout>
+				<s:HorizontalLayout verticalAlign="middle" gap="8"/>
+			</s:layout>
+			<mx:ColorPicker id="edgeColor" showTextField="false" editable="false" change="onEdgeColorChanged( event )"/>
+			<s:Label id="edgeColorValue" fontWeight="bold" fontSize="14"/>
+		</s:Group>
+	</s:Group>
+	<!--Цвет-->
+	<s:Group width="100%">
+		<s:layout>
+			<s:HorizontalLayout paddingTop="12"/>
+		</s:layout>
+		<s:Group width="50%" >
+	     <s:layout>
+			 <s:HorizontalLayout />
+		 </s:layout>
+			<s:Button label="Закрыть" width="80" click="closeButtonClick()"/>
+		</s:Group>
+		<s:Group width="50%" >
+			<s:layout>
+				<s:HorizontalLayout horizontalAlign="right"/>
+			</s:layout>
+			<s:Button label="Применить" width="80" click="applyButtonClick()"/>
+		</s:Group>
+	</s:Group>
+</s:TitleWindow>

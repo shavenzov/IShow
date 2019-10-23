@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true">
+	<s:layout>
+		<s:HorizontalLayout verticalAlign="middle"/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import org.un.cava.birdeye.ravis.assets.Assets;
+			
+			override public function set data( value : Object ) : void
+			{
+				super.data = value;
+				
+				l.text = data.name;
+			}
+		]]>
+	</fx:Script>
+	
+	<mx:Image source="{Assets.EDGE_ICON}" /> 
+	<s:Label id="l" />
+		
+</s:ItemRenderer>

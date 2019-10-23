@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="150">
+	<fx:Script source="extendedhslider.as" />
+	<fx:Metadata>
+		[Event(name="change", type="mx.events.SliderEvent")]
+	</fx:Metadata>
+	<s:layout>
+		<s:HorizontalLayout verticalAlign="middle" gap="2" paddingLeft="4" paddingRight="4" paddingBottom="4"/>
+	</s:layout>
+	<s:Group height="100%">
+		<s:Button horizontalCenter="0" verticalCenter="13" icon="{EmbeddedIcons.zoomoutIcon}" cornerRadius="5" width="16" height="16" autoRepeat="true" buttonDown="onButtonDecDown()" mouseUp="onButtonUp()"/>			
+	</s:Group>
+	<s:Group width="100%">
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
+		<s:Group width="100%">
+			<s:layout>
+				<s:HorizontalLayout gap="0" horizontalAlign="center"/>
+			</s:layout>
+			<s:Label text="{label}"/>
+			<s:Label id="valueLabel" />
+		</s:Group>
+		<mx:HSlider width="100%" id="slider" minimum="{minimum}" maximum="{maximum}" value="{value}" liveDragging="{liveDragging}" tickInterval="{tickInterval}" snapInterval="{snapInterval}" labels="{labels}" tickValues="{tickValues}" dataTipFormatFunction="_dataTipFormatFunction" change="onSliderChange( event )" valueCommit="updateLabel()"/>
+	</s:Group>
+	<s:Group height="100%">
+	    <s:Button horizontalCenter="0" verticalCenter="13" icon="{EmbeddedIcons.zoominIcon}" cornerRadius="5" width="16" height="16" autoRepeat="true" buttonDown="onButtonIncDown()" mouseUp="onButtonUp()"/>
+	</s:Group>
+</s:Group>

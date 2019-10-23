@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx"
+					xmlns:layout="ui.layout.*"
+					implements="ui.IToolTab">
+	<fx:Script source="layouttab.as" />
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	<mx:LinkBar dataProvider="{layoutControls}" borderStyle="solid" borderColor="0xACACAC"/>
+	<mx:ViewStack height="100%" width="100%" id="layoutControls" paddingLeft="8">
+		<layout:ConcentricRadialUI label="Круговая (стандартная)"/>
+		<layout:ParentCenteredRadialUI label="Круговая (от родителя)"/>
+		<layout:CircularLayouterUI label="Круговая (единый круг)"/>
+		<layout:HierarchicalUI label="Иерархическая"/>
+	</mx:ViewStack>
+</s:NavigatorContent>

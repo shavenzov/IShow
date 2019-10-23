@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:controls="com.controls.*"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" styleName="controlPanelSubMenuTip" borderSkin="mx.skins.halo.ToolTipBorder" verticalScrollPolicy="off" horizontalScrollPolicy="off" width="330" paddingBottom="8" paddingLeft="8" paddingTop="8" paddingRight="8" creationComplete="determineSelectedLayouter()">
+	<controls:ArrowLabel text="Круговая"/>
+	<mx:Tile>
+		<controls:LinkButton id="concentricRadial" label="Стандартная" click="onSelect( event )"/>
+		<controls:LinkButton id="parentCentered" label="От родителя" click="onSelect( event )"/>
+		<controls:LinkButton id="circular" label="Единый круг" click="onSelect( event )"/>
+		<!--
+		<controls:LinkButton id="circularBiconnectedInside" label="Круговая (biconnected inside)" click="onSelect( event )"/>
+		-->
+	</mx:Tile>
+	<controls:ArrowLabel text="Иерархическая"/>
+	<mx:Tile>
+		<controls:LinkButton id="hierarchicalTopDown" label="Сверху вниз" click="onSelect( event )"/>
+		<controls:LinkButton id="hierarchicalBottomUp" label="Снизу вверх" click="onSelect( event )"/>
+		<controls:LinkButton id="hierarchicalLeftRight" label="Слева на право" click="onSelect( event )"/>
+		<controls:LinkButton id="hierarchicalRightLeft" label="Справа на лево" click="onSelect( event )"/>
+	</mx:Tile>
+	<controls:ArrowLabel text="Органическая"/>
+	<mx:Tile>
+		<controls:LinkButton id="organic" label="Органическая" click="onSelect( event )"/>
+	</mx:Tile>
+	<controls:ArrowLabel text="Пузырьковая" />
+	<mx:Tile >
+		<controls:LinkButton id="bubble" label="Не направленная" click="onSelect( event )"/>
+		<controls:LinkButton id="bubbleTopDown" label="Сверху вниз" click="onSelect( event )"/>
+		<controls:LinkButton id="bubbleBottomUp" label="Снизу вверх" click="onSelect( event )"/>
+		<controls:LinkButton id="bubbleLeftRight" label="Слева на право" click="onSelect( event )"/>
+		<controls:LinkButton id="bubbleRightLeft" label="Справа на лево" click="onSelect( event )"/>
+	</mx:Tile>
+	<fx:Script>
+		<![CDATA[
+			import mx.managers.history.History;
+			
+			import org.un.cava.birdeye.ravis.graphLayout.layout.BubbleLayouter;
+			import org.un.cava.birdeye.ravis.graphLayout.layout.CircularLayouter;
+			import org.un.cava.birdeye.ravis.graphLayout.layout.CircularLayouterStyle;
+			import org.un.cava.birdeye.ravis.graphLayout.layout.ConcentricRadialLayouter;
+			import org.un.cava.birdeye.ravis.graphLayout.layout.ForceDirectedLayouter;
+			import org.un.cava.birdeye.ravis.graphLayout.layout.HierarchicalLayouter;
+			import org.un.cava.birdeye.ravis.graphLayout.layout.ILayoutAlgorithm;
+			import org.un.cava.birdeye.ravis.graphLayout.layout.LayoutOrientation;
+			import org.un.cava.birdeye.ravis.graphLayout.layout.ParentCenteredRadialLayouter;
+			import org.un.cava.birdeye.ravis.graphLayout.visual.IVisualGraph;
+			import org.un.cava.birdeye.ravis.history.LayoutChanged;
+			
+			public var vg : IVisualGraph;
+			
+			private var selectedButton : LinkButton;
+			
+			private function onSelect( e : MouseEvent ) : void
+			{
+				var layouter : ILayoutAlgorithm;
+				
+				switch( e.currentTarget )
+				{
+					case concentricRadial    : layouter = new ConcentricRadialLayouter( vg ); 
+						                         break; 
+						
+					case parentCentered      : layouter = new ParentCenteredRadialLayouter( vg );
+						                         break;
+						
+					case circular            : layouter = new CircularLayouter( vg );
+						                         break;
+					
+					/*case circularBiconnectedInside : layouter = new CircularLayouter( vg );
+						                             CircularLayouter( layouter ).style = CircularLayouterStyle.BICONNECTED_INSIDE;
+													 break;*/
+						
+					case hierarchicalTopDown : layouter = new HierarchicalLayouter( vg );
+						                         HierarchicalLayouter( layouter ).orientation = LayoutOrientation.TOP_DOWN;
+												 break;
+					
+					case hierarchicalBottomUp : layouter = new HierarchicalLayouter( vg );
+						                          HierarchicalLayouter( layouter ).orientation = LayoutOrientation.BOTTOM_UP;
+						                          break;
+					
+					case hierarchicalLeftRight : layouter = new HierarchicalLayouter( vg );
+						                           HierarchicalLayouter( layouter ).orientation = LayoutOrientation.LEFT_RIGHT;
+						                           break;
+					
+					case hierarchicalRightLeft : layouter = new HierarchicalLayouter( vg );
+						                           HierarchicalLayouter( layouter ).orientation = LayoutOrientation.RIGHT_LEFT;
+						                           break;
+					
+					case organic               : layouter = new ForceDirectedLayouter( vg );
+						                         break;
+					
+					case bubble                : layouter = new BubbleLayouter( vg );
+						                           BubbleLayouter( layouter ).orientation = LayoutOrientation.NONE;
+												   break;
+					
+					case bubbleTopDown         : layouter = new BubbleLayouter( vg );
+						                           BubbleLayouter( layouter ).orientation = LayoutOrientation.TOP_DOWN;
+						                           break; 
+					
+					case bubbleBottomUp        : layouter = new BubbleLayouter( vg );
+						                           BubbleLayouter( layouter ).orientation = LayoutOrientation.BOTTOM_UP;
+						                           break;
+					
+					case bubbleLeftRight       : layouter = new BubbleLayouter( vg );
+						                           BubbleLayouter( layouter ).orientation = LayoutOrientation.LEFT_RIGHT;
+						                           break;
+					
+					case bubbleRightLeft       : layouter = new BubbleLayouter( vg );
+						                           BubbleLayouter( layouter ).orientation = LayoutOrientation.RIGHT_LEFT;
+						                           break;
+				}
+				
+				var lastLayouter : ILayoutAlgorithm = vg.layouter;
+				
+				layouter.autoFitEnabled   = lastLayouter.autoFitEnabled;
+				layouter.fitToWindow      = lastLayouter.fitToWindow;
+				layouter.linkLength       = lastLayouter.linkLength;
+				layouter.disableAnimation = lastLayouter.disableAnimation;
+				
+				/*Поодержка History*/
+				History.add( new LayoutChanged( vg ) );
+				
+				vg.layouter = layouter;
+				vg.draw();
+				
+				setSelectedButton( LinkButton( e.currentTarget ) );
+			}
+			
+			private function determineSelectedLayouter() : void
+			{
+				var layouter : ILayoutAlgorithm = vg.layouter;
+				var b        : LinkButton;
+				
+				if ( layouter is ConcentricRadialLayouter )
+				{
+					b = concentricRadial;
+				}
+				
+				if ( layouter is ParentCenteredRadialLayouter )
+				{
+					b = parentCentered;
+				}
+				
+				if ( layouter is CircularLayouter )
+				{
+					switch( CircularLayouter( layouter ).style )
+					{
+						case CircularLayouterStyle.SINGLE_CYCLE       : b = circular; break;
+						//case CircularLayouterStyle.BICONNECTED_INSIDE : b = circularBiconnectedInside; break;
+					}
+				}
+				
+				if ( layouter is HierarchicalLayouter )
+				{
+					switch( HierarchicalLayouter( layouter ).orientation )
+					{
+						case LayoutOrientation.TOP_DOWN   : b = hierarchicalTopDown;   break;
+						case LayoutOrientation.BOTTOM_UP  : b = hierarchicalBottomUp;  break;
+						case LayoutOrientation.LEFT_RIGHT : b = hierarchicalLeftRight; break;
+						case LayoutOrientation.RIGHT_LEFT : b = hierarchicalRightLeft; break;	
+					}
+				}
+				
+				if ( layouter is ForceDirectedLayouter )
+				{
+					b = organic;
+				}
+				
+				if ( layouter is BubbleLayouter )
+				{
+					switch( BubbleLayouter( layouter ).orientation )
+					{
+						case LayoutOrientation.NONE       : b = bubble;          break;
+						case LayoutOrientation.TOP_DOWN	  : b = bubbleTopDown;   break;
+						case LayoutOrientation.BOTTOM_UP  : b = bubbleBottomUp;  break;
+						case LayoutOrientation.LEFT_RIGHT : b = bubbleLeftRight; break;
+						case LayoutOrientation.RIGHT_LEFT : b = bubbleRightLeft; break;
+					}
+				}
+				
+				if ( b ) setSelectedButton( b );
+			}
+			
+			private function setSelectedButton( b : LinkButton ) : void
+			{
+				if ( selectedButton )
+				{
+					selectedButton.selected     = false;
+					selectedButton.mouseEnabled = true;
+				}
+				
+				b.selected = true;
+				b.mouseEnabled = false;
+				
+				selectedButton = b;
+			}
+		]]>
+	</fx:Script>
+</mx:VBox>

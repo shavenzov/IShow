@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" click="generate()" creationComplete="generate()">
+	<fx:Script>
+		<![CDATA[
+			import org.un.cava.birdeye.ravis.utils.Geometry;
+			
+			private function get randomX() : Number
+			{
+				return Math.random() * width;
+			}
+			
+			private function get randomY() : Number
+			{
+				return Math.random() * height;
+			}
+			
+			private function generate() : void
+			{
+				invalidateDisplayList();
+			}
+			
+			private function rectAndSegmentTest() : void
+			{
+				var pt1  : Point = new Point( randomX, randomY );
+				var pt2  : Point = new Point( randomX, randomY );
+				var rect : Rectangle = new Rectangle();
+				rect.x = randomX;
+				rect.y = randomY;
+				rect.width = ( width - rect.x ) * Math.random();
+				rect.height = ( height - rect.y ) * Math.random();
+				
+				dummy.graphics.clear();
+				dummy.graphics.lineStyle( 3.0, 0x0000ff );
+				dummy.graphics.drawRect( rect.x, rect.y, rect.width, rect.height );
+				dummy.graphics.lineStyle( 3.0, 0x00ff00 );
+				dummy.graphics.moveTo( pt1.x, pt1.y );
+				dummy.graphics.lineTo( pt2.x, pt2.y );
+				
+				trace( pt1, pt2, rect );
+				trace( 'hitTest', Geometry.hitTestRectAndSegment( pt1, pt2, rect ) );
+			}
+			
+			private function twoSegmentsTest() : void
+			{
+				var pt1  : Point = new Point( randomX, randomY );
+				var pt2  : Point = new Point( randomX, randomY );
+				var pt3  : Point = new Point( randomX, randomY );
+				var pt4  : Point = new Point( randomX, randomY );
+				var intersection : Boolean = Geometry.segmentsIntersects( pt1, pt2, pt3, pt4 );
+				
+				dummy.graphics.clear();
+				dummy.graphics.lineStyle( 3.0, 0x0000ff );
+				
+				dummy.graphics.moveTo( pt1.x, pt1.y );
+				dummy.graphics.lineTo( pt2.x, pt2.y );
+				
+				dummy.graphics.moveTo( pt3.x, pt3.y );
+				dummy.graphics.lineTo( pt4.x, pt4.y );
+				
+				//dummy.graphics.drawCircle( intersection.x, intersection.y, 16 );
+				
+				
+				trace( 'hitTest', intersection );
+			}
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				super.updateDisplayList( unscaledWidth, unscaledHeight );
+				
+				rectAndSegmentTest()
+			}
+			
+		]]>
+	</fx:Script>
+	<mx:UIComponent left="0" right="0" top="0" bottom="0" id="dummy" />
+</s:Application>

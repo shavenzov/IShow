@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="250" height="120" creationComplete="onCreationComplete()">
+	<fx:Declarations>
+		<s:RadioButtonGroup id="choice"/>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			
+			public var value : int;
+			public var closeAction : Function;
+			public var defaultValue : int = 2;
+			
+			private function onSelectButtonClick() : void
+			{
+				value = int( choice.selectedValue );
+				
+				dispatchEvent( new CloseEvent( CloseEvent.CLOSE, false, false, Alert.OK ) );
+			}
+			
+			private function onCreationComplete() : void
+			{
+				var rb : RadioButton = RadioButton( radioButtons.getElementAt( defaultValue - 1 ) );
+				    rb.selected = true;
+			}
+			
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	<s:Group width="100%" id="radioButtons">
+		<s:layout>
+			<s:HorizontalLayout horizontalAlign="center" paddingTop="8" paddingLeft="8"/>
+		</s:layout>
+		<s:RadioButton group="{choice}" label="1" value="1"/>
+		<s:RadioButton group="{choice}" label="2" value="2"/>
+		<s:RadioButton group="{choice}" label="3" value="3"/>
+		<s:RadioButton group="{choice}" label="4" value="4"/>
+		<s:RadioButton group="{choice}" label="5" value="5"/>
+		<s:RadioButton group="{choice}" label="6" value="6"/>
+		<s:RadioButton group="{choice}" label="7" value="7"/>
+	</s:Group>
+	<s:Group width="100%" height="100%">
+		<s:layout>
+			<s:HorizontalLayout horizontalAlign="center" verticalAlign="middle"/> 
+		</s:layout>
+		<mx:Button label="Выбрать" width="128" height="24" click="onSelectButtonClick()"/>
+	</s:Group>
+</s:Panel>
